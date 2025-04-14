@@ -1,6 +1,10 @@
-local iterations = 2
+local iterations = 10
 local delayInSeconds = 1.5
-local nextButtonCoordinates = {x = 1727, y = 533} -- Tọa độ nút "Next"
+local jsCode = [[
+var text = document.body.innerText.split('\n');
+text = text.slice(9, text.length - 9).join('\n');
+copy(text);
+]]
 
 local function keyStroke(mods, key)
   hs.eventtap.keyStroke(mods, key, 0)
@@ -22,13 +26,9 @@ local function openDevTools()
 end
 
 local function copyPageContent()
-  hs.eventtap.keyStrokes([[(() => {
-var text = document.body.innerText.split('\n');
-text = text.slice(9, text.length - 9).join('\n');
-copy(text);
-})();]])
+  hs.eventtap.keyStrokes(jsCode)
   keyStroke({}, "return")
-  hs.timer.usleep(1000000)
+  hs.timer.usleep(3000000)
 end
 
 local function pasteContentInTextEdit()
@@ -43,9 +43,7 @@ local function clickNextButton()
   if openApplication("Google Chrome") then
     keyStroke({"cmd"}, "w") -- Đóng tab hiện tại
     hs.timer.usleep(1000000)
-    local pos = hs.mouse.getAbsolutePosition()
-    print("Tọa độ chuột: X = " .. pos.x .. ", Y = " .. pos.y) 
-    hs.eventtap.leftClick(pos)
+    hs.eventtap.keyStroke({}, "right")
     hs.timer.usleep(delayInSeconds * 1000000)
   end
 end
@@ -56,6 +54,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "C", function()
     if openApplication("Google Chrome") then
       openDevTools()
       copyPageContent()
+      hs.timer.usleep(500000)
       pasteContentInTextEdit()
       clickNextButton()
     end
