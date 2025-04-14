@@ -1,7 +1,8 @@
-﻿#Requires AutoHotkey v2.0
+#Requires AutoHotkey v2.0
 #SingleInstance Force
 
-iterations := 30
+iterations := 10
+
 jsCode := "copy(document.body.innerText.split('\n').slice(9, -9).join('\n'));"
 
 SetKeyDelay(20) ; Giảm độ trễ giữa các phím bấm
@@ -50,7 +51,7 @@ clickNextButton() {
     if (openApplication("ahk_class Chrome_WidgetWin_1", "")) {
         Send("^+w")
         Sleep(1500)
-        Send("{Right}")
+        Click("left")
         Sleep(1500)
     }
 }
