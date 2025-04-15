@@ -1,0 +1,15 @@
+{
+  "name": "copy-content-evand",
+  "version": "1.0.0",
+  "description": "Script to copy content using Playwright",
+  "main": "scrape.js",
+  "scripts": {
+    "start": "node scrape.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.42.1"
+  }
+}
