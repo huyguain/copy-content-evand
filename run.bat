@@ -1,6 +1,4 @@
 @echo off
-chcp 65001 >nul
-
 echo 📚 Đang chạy tool Playwright...
 
 REM Lấy đường dẫn thư mục hiện tại (nơi chứa run.bat)
