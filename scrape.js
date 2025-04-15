@@ -52,7 +52,7 @@ function clearOutputFile() {
         console.log('🌐 Đang mở trình duyệt...');
         const context = await chromium.launchPersistentContext(userDataDir, {
             headless: false,
-            // channel: 'chrome', // Sử dụng Chrome đã cài đặt
+            channel: 'chrome', // Sử dụng Chrome đã cài đặt
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
 
