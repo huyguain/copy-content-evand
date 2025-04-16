@@ -7,6 +7,7 @@ const iterations = parseInt(process.argv[2]) || 10;
 const targetUrl = process.argv[3];
 const targetProfile = process.argv[4] || 'Default'; // Đường dẫn đến profile Default của Chrome
 const outputFile = 'output.txt';
+let prevContentPage = '';
 
 // Hàm lấy đường dẫn đến profile Default của Chrome
 function getChromeDefaultProfile() {
@@ -110,6 +111,12 @@ function clearOutputFile() {
                     break;
                 }
 
+                if (pageNumber > iterations || content === prevContentPage) {
+                    console.log('📚 Đã đến trang cuối');
+                    break;
+                }
+                prevContentPage = content;
+
                 console.log(`📝 Đã sao chép ${content.length} ký tự`);
                 allContent += content + '\n\n';
 
@@ -123,11 +130,6 @@ function clearOutputFile() {
                 //     }
                 //     return false;
                 // });
-
-                if (pageNumber >= iterations) {
-                    console.log('📚 Đã đến trang cuối');
-                    break;
-                }
                 await page.keyboard.press('ArrowRight');
                 console.log('⏭️ Chuyển trang tiếp theo');
                 pageNumber++;
