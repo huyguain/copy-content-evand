@@ -118,7 +118,7 @@ function clearOutputFile() {
                 prevContentPage = content;
 
                 console.log(`📝 Đã sao chép ${content.length} ký tự`);
-                allContent += content + '\n\n';
+                allContent += content + '\n';
 
                 // Tìm và click nút Next
                 // const hasNextPage = await page.evaluate(() => {
